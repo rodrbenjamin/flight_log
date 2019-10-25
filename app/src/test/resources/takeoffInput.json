@@ -1,0 +1,36 @@
+{
+  "takeoffTime": "2018-11-11T19:11:15.767643",
+  "task":"Task A",
+  "towplane":{
+    "airplane":{
+      "id":1,
+      "immatriculation": null,
+      "type": null
+    },
+    "pilot":{
+      "memberId": 3
+    },
+    "copilot": 2,
+    "note":"Note towplane"
+  },
+  "glider":{
+    "airplane":{
+      "id": null,
+      "immatriculation":"OK-HDG",
+      "type":"LF-107 Luňák"
+    },
+    "pilot":{
+      "memberId": null,
+      "firstName":"Eliška",
+      "lastName":"Kutnohorská",
+      "address": {
+        "street": "Tychonova 2",
+        "city": "Praha 6",
+        "postalCode": "16000",
+        "country": "Czech Republic"
+      }
+    },
+    "copilot":9,
+    "note":"Note glider"
+  }
+}
