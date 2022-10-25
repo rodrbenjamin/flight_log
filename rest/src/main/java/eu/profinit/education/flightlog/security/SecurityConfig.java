@@ -2,20 +2,16 @@ package eu.profinit.education.flightlog.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
-
-    @Override
-    public void configure(WebSecurity webSecurity) {
-        webSecurity.ignoring().anyRequest();
+public class SecurityConfig {
+    @Bean
+    public WebSecurityCustomizer ignoringCustomizer() {
+        return web -> web.ignoring().anyRequest();
     }
 
     @Bean
@@ -28,10 +24,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         filter.setIncludeHeaders(true);
         filter.setAfterMessagePrefix("REQUEST DATA : ");
         return filter;
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
     }
 }

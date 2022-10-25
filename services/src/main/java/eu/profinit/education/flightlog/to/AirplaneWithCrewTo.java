@@ -1,16 +1,23 @@
 package eu.profinit.education.flightlog.to;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
 import java.io.Serializable;
 
-@Data
+@Value
 @Builder
+@AllArgsConstructor
+@Jacksonized
 public class AirplaneWithCrewTo implements Serializable {
 
-    private AirplaneTo airplane;
-    private PersonTo pilot;
-    private PersonTo copilot;
-    private String note;
+    AirplaneTo airplane;
+
+    PersonTo pilot;
+
+    PersonTo copilot;
+
+    String note;
 }

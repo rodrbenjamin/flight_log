@@ -1,33 +1,29 @@
 package eu.profinit.education.flightlog.service;
 
-import eu.profinit.education.flightlog.IntegrationTestConfig;
-import eu.profinit.education.flightlog.to.FileExportTo;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.transaction.Transactional;
+import eu.profinit.education.flightlog.AbstractIntegrationTest;
+import eu.profinit.education.flightlog.to.FileExportTo;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = IntegrationTestConfig.class)
-@Transactional
-@TestPropertySource(
-    locations = "classpath:application-integrationtest.properties")
-public class CsvExportServiceTest {
+public class CsvExportServiceTest extends AbstractIntegrationTest {
 
     @Autowired
     private CsvExportService testSubject;
 
-    // TODO 6.1: Odstrante anotaci @Ignore, aby se test vykonaval
-    @Ignore("Tested method is not implemented yet")
+    // TODO 6.1: Odstrante anotaci @Disabled, aby se test vykonaval
+    @Disabled("Tested method is not implemented yet")
     @Test
-    public void testCSVExport() {
-        FileExportTo allFlightsAsCsv = testSubject.getAllFlightsAsCsv();
+    public void testCSVExport() throws IOException, URISyntaxException {
+        FileExportTo fileExportTo = testSubject.getAllFlightsAsCsv();
 
         // TODO 6.2: zkontrolujte obsah CSV
+        // Tip: Využijte třídu FileUtils
     }
+
+
 }

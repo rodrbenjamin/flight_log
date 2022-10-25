@@ -13,7 +13,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class FlightId implements Serializable {
 
-    private final Long id;
+    Long id;
 
     public static FlightId of(Long id) {
         Assert.notNull(id, "Flight ID cannot be null");

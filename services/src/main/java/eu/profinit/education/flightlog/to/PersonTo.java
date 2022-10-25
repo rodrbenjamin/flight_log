@@ -3,31 +3,35 @@ package eu.profinit.education.flightlog.to;
 import eu.profinit.education.flightlog.domain.entities.Person;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
 import java.io.Serializable;
 
-@Data
-@Builder
+@Value
 @AllArgsConstructor
-@NoArgsConstructor
+@Builder
+@Jacksonized
 public class PersonTo implements Serializable {
 
-    private Long memberId;
-    private String firstName;
-    private String lastName;
-    private AddressTo address;
+    Long memberId;
 
-    public PersonTo(String firstName, String lastName, AddressTo address) {
-        this.memberId = null;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
+    String firstName;
+
+    String lastName;
+
+    AddressTo address;
+
+    public static PersonTo ofGuest(String firstName, String lastName, AddressTo address) {
+        return new PersonTo(null, firstName, lastName, address);
     }
 
-    public PersonTo(Long memberId) {
-        this.memberId = memberId;
+    public static PersonTo ofClubMember(Long memberId) {
+        return ofClubMember(memberId, null, null);
+    }
+
+    public static PersonTo ofClubMember(Long memberId, String firstName, String lastName) {
+        return new PersonTo(memberId, firstName, lastName, null);
     }
 
     public static PersonTo fromEntity(Person entity) {

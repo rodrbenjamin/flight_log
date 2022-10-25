@@ -1,19 +1,23 @@
 package eu.profinit.education.flightlog.to;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
+@Value
 @Builder
+@Jacksonized
 public class FlightTakeoffTo implements Serializable {
 
-    private LocalDateTime takeoffTime;
-    private String task;
-    private AirplaneWithCrewTo towplane;
-    private AirplaneWithCrewTo glider;
+    LocalDateTime takeoffTime;
+
+    String task;
+
+    AirplaneWithCrewTo towplane;
+
+    AirplaneWithCrewTo glider;
 
 }
-

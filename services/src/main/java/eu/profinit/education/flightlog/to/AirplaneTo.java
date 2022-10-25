@@ -4,28 +4,31 @@ import eu.profinit.education.flightlog.domain.codebooks.ClubAirplane;
 import eu.profinit.education.flightlog.domain.entities.Airplane;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
 import java.io.Serializable;
 
-@Data
+@Value
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@Jacksonized
 public class AirplaneTo implements Serializable {
-    private Long id;
-    private String immatriculation;
-    private String type;
+    Long id;
+
+    String immatriculation;
+
+    String type;
 
 
     public AirplaneTo(String immatriculation, String type) {
+        this.id = null;
         this.immatriculation = immatriculation;
         this.type = type;
     }
-    
-    public static AirplaneTo fromEntity(Airplane entity){
-        if(entity.getClubAirplane() != null) {
+
+    public static AirplaneTo fromEntity(Airplane entity) {
+        if (entity.getClubAirplane() != null) {
             // club airplane
             return new AirplaneTo(entity.getClubAirplane().getId(), entity.getClubAirplane().getImmatriculation(), entity.getClubAirplane().getType().getType());
         } else {
@@ -33,7 +36,7 @@ public class AirplaneTo implements Serializable {
         }
     }
 
-    public static AirplaneTo fromEntity(ClubAirplane entity){
+    public static AirplaneTo fromEntity(ClubAirplane entity) {
         return new AirplaneTo(entity.getId(), entity.getImmatriculation(), entity.getType().getType());
     }
 }

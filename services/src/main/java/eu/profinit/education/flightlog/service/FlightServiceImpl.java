@@ -1,5 +1,14 @@
 package eu.profinit.education.flightlog.service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
 import eu.profinit.education.flightlog.common.Clock;
 import eu.profinit.education.flightlog.domain.entities.Airplane;
 import eu.profinit.education.flightlog.domain.entities.Flight;
@@ -16,13 +25,6 @@ import eu.profinit.education.flightlog.to.FlightTo;
 import eu.profinit.education.flightlog.to.FlightTuppleTo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @Transactional
@@ -30,12 +32,13 @@ import java.util.List;
 @Slf4j
 public class FlightServiceImpl implements FlightService {
 
+    private static final int MAX_RECORDS_IN_GUI = 2000;
+
     private final FlightRepository flightRepository;
     private final ClubAirplaneRepository clubAirplaneRepository;
     private final Clock clock;
 
     private final PersonService personService;
-
 
     @Override
     public void takeoff(FlightTakeoffTo flightStart) {
@@ -108,7 +111,7 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public List<FlightTo> getFlightsInTheAir() {
         // TODO 2.5: načtěte lety ve vzduchu pomocí vaší nové metody ve FlightRepository
-        // Můžete použít Java 8 Stream API pro konverzi na Transfer Object (TO)
+        // Tip: Můžete použít Java 8 Stream API pro konverzi na Transfer Object (TO)
         return new ArrayList<>();
     }
 

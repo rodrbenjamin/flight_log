@@ -8,20 +8,17 @@ import eu.profinit.education.flightlog.to.AirplaneWithCrewTo;
 import eu.profinit.education.flightlog.to.FlightTakeoffTo;
 import eu.profinit.education.flightlog.to.PersonTo;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-@RunWith(SpringRunner.class)
 @Slf4j
-public class FlightControllerTest {
+class FlightControllerTest {
 
-    private static final ObjectMapper jsonMapper = new ObjectMapper();
+    private final ObjectMapper jsonMapper = new RestConfig().jackson2ObjectMapperBuilder().build();
 
     @Test
-    public void generateJson() throws JsonProcessingException {
+    void generateJson() throws JsonProcessingException {
         AirplaneTo towplane = AirplaneTo.builder().id(5L).immatriculation("OK125").type("Type engine").build();
         AirplaneWithCrewTo towplaneWithCrew = AirplaneWithCrewTo.builder().airplane(towplane).note("Note towplane").pilot(PersonTo.builder().firstName("Adalbert").lastName("Kolínsk7").memberId(123L).build()).build();
         AirplaneTo glider = AirplaneTo.builder().id(6L).immatriculation("OKHDG").type("Type glider").build();
@@ -33,8 +30,6 @@ public class FlightControllerTest {
 
         String json = jsonMapper.writeValueAsString(start);
         log.info("JSON: {}", json);
-
-
     }
 
 }

@@ -1,13 +1,14 @@
 package eu.profinit.education.flightlog.to;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
-@Data
-@AllArgsConstructor
+@Value
 @Builder
+@Jacksonized
 public class FlightTuppleTo {
-    private FlightTo towplane;
-    private FlightTo glider;
+    FlightTo towplane;
+
+    FlightTo glider;
 }

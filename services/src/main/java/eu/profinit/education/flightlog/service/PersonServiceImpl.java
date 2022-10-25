@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +24,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<PersonTo> getClubMembers() {
         return clubDatabaseDao.getUsers().stream().map(this::convert2To)
-            .collect(Collectors.toList());
+            .toList();
     }
 
     private User getClubMemberById(long memberId) {
@@ -64,7 +63,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     private PersonTo convert2To(User user) {
-        return new PersonTo(user.getMemberId(), user.getFirstName(), user.getLastName(), null);
+        return PersonTo.ofClubMember(user.getMemberId(), user.getFirstName(), user.getLastName());
     }
 
 }

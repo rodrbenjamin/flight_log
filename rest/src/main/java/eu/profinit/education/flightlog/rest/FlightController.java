@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -44,26 +45,22 @@ public class FlightController {
 
     @GetMapping("flight/report")
     public List<FlightTuppleTo> getFlightReport(){
-        List<FlightTuppleTo> flightsInTheAir = flightService.getFlightsForReport();
-        return flightsInTheAir;
+        return flightService.getFlightsForReport();
     }
 
     @PostMapping("/flight/takeoff")
-    public ResponseEntity takeoff(@RequestBody FlightTakeoffTo start){
+    @ResponseStatus(HttpStatus.CREATED)
+    public void takeoff(@RequestBody FlightTakeoffTo start) {
         log.debug("Start\n{}", start);
 
         flightService.takeoff(start);
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/flight/land")
-    public ResponseEntity land(@RequestBody FlightLandingTo landing){
+    public void land(@RequestBody FlightLandingTo landing) {
         log.debug("Land\n{}", landing);
 
         flightService.land(FlightId.of(landing.getFlightId()), landing.getLandingTime());
-
-        return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping("flight/export")

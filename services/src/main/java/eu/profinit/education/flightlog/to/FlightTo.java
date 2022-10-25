@@ -1,29 +1,31 @@
 package eu.profinit.education.flightlog.to;
 
 import eu.profinit.education.flightlog.domain.entities.Flight;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Value
 @Builder
+@Jacksonized
 public class FlightTo implements Serializable {
 
-    private Long id;
-    private LocalDateTime takeoffTime;
-    private LocalDateTime landingTime;
-    private AirplaneTo airplane;
+    Long id;
 
-    private PersonTo pilot;
-    private PersonTo copilot;
+    LocalDateTime takeoffTime;
 
-    private String task;
+    LocalDateTime landingTime;
+
+    AirplaneTo airplane;
+
+    PersonTo pilot;
+
+    PersonTo copilot;
+
+    String task;
 
     public static FlightTo fromEntity(Flight entity) {
         if (entity == null) {

@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>eu.profinit.education.flightlog</groupId>
-	<artifactId>flightlog</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+    <groupId>eu.profinit.education.flightlog</groupId>
+    <artifactId>flightlog</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-	<name>flight-log</name>
-	<description>Project to log flight departures and arrivals.</description>
+    <name>flight-log</name>
+    <description>Project to log flight departures and arrivals.</description>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.8.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.5</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>11</java.version>
-        <apache.commons.csv.version>1.6</apache.commons.csv.version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>17</java.version>
+        <apache.commons.csv.version>1.9.0</apache.commons.csv.version>
         <javax.activation.version>1.1.1</javax.activation.version>
-        <sun.xml.bind.jaxb>2.2.7</sun.xml.bind.jaxb>
-	</properties>
+        <sun.xml.bind.jaxb>4.0.1</sun.xml.bind.jaxb>
+    </properties>
 
     <modules>
         <module>app</module>
@@ -34,7 +34,6 @@
         <module>rest</module>
         <module>external-system-connector</module>
         <module>common</module>
-
     </modules>
 
     <dependencyManagement>
@@ -64,6 +63,7 @@
                 <artifactId>common</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <!-- TODO 4.1: přidejte závislost na knihovně pro práci s CSV s verzí definovanou <properties> -->
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-core</artifactId>
@@ -79,10 +79,20 @@
                 <artifactId>activation</artifactId>
                 <version>${javax.activation.version}</version>
             </dependency>
-            <!-- TODO 4.1: přidejte závislost na knihovně pro práci s CSV s verzí definovanou <properties> -->
-
         </dependencies>
     </dependencyManagement>
 
+    <!-- Set UTF-8 for tests to run them with UTF-8 rather than platform default.-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

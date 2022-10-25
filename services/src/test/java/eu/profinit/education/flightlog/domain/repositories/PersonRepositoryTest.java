@@ -1,39 +1,42 @@
 package eu.profinit.education.flightlog.domain.repositories;
 
-
-import eu.profinit.education.flightlog.IntegrationTestConfig;
+import eu.profinit.education.flightlog.AbstractIntegrationTest;
 import eu.profinit.education.flightlog.domain.entities.Person;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = IntegrationTestConfig.class)
-@Transactional
-@TestPropertySource(
-    locations = "classpath:application-integrationtest.properties")
-public class PersonRepositoryTest {
+class PersonRepositoryTest extends AbstractIntegrationTest {
 
     @Autowired
     private PersonRepository testSubject;
 
-    private Long testClubMemberId = 1L;
+    private final Long testClubMemberId = 1L;
+
+    private final Long testClubMember2Id = 2L;
 
     @Test
-    public void shouldFindClubMemberByMemberId() {
+    void shouldLoadAllClubMembers() {
+        List<Person> clubMembers = testSubject
+            .findAllByPersonTypeOrderByLastNameAscFirstNameAsc(Person.Type.CLUB_MEMBER);
+
+        assertEquals(2, clubMembers.size(), "There should be 2 club members");
+        assertEquals(testClubMember2Id, clubMembers.get(0).getMemberId(), "First Member ID should be 2");
+        assertEquals(testClubMemberId, clubMembers.get(1).getMemberId(), "First Member ID should be 1");
+
+    }
+
+    @Test
+    void shouldFindClubMemberByMemberId() {
         Optional<Person> maybeClubMember = testSubject.findByMemberId(testClubMemberId);
 
-        assertTrue("Club member should be found", maybeClubMember.isPresent());
-        assertEquals("Member ID should be 1", testClubMemberId, maybeClubMember.get().getMemberId());
+        assertTrue(maybeClubMember.isPresent(), "Club member should be found");
+        assertEquals(testClubMemberId, maybeClubMember.get().getMemberId(), "Member ID should be 1");
 
     }
 }

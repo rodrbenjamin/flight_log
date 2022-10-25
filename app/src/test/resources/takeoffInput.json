@@ -2,16 +2,18 @@
   "takeoffTime": "2018-11-11T19:11:15.767643",
   "task":"Task A",
   "towplane":{
-    "airplane":{
-      "id":1,
+    "airplane": {
+      "id": 1,
       "immatriculation": null,
       "type": null
     },
-    "pilot":{
+    "pilot": {
       "memberId": 3
     },
-    "copilot": 2,
-    "note":"Note towplane"
+    "copilot": {
+      "memberId": 2
+    },
+    "note": "Note towplane"
   },
   "glider":{
     "airplane":{
@@ -19,10 +21,10 @@
       "immatriculation":"OK-HDG",
       "type":"LF-107 Luňák"
     },
-    "pilot":{
+    "pilot": {
       "memberId": null,
-      "firstName":"Eliška",
-      "lastName":"Kutnohorská",
+      "firstName": "Eliška",
+      "lastName": "Kutnohorská",
       "address": {
         "street": "Tychonova 2",
         "city": "Praha 6",
@@ -30,7 +32,9 @@
         "country": "Czech Republic"
       }
     },
-    "copilot":9,
-    "note":"Note glider"
+    "copilot": {
+      "memberId": 9
+    },
+    "note": "Note glider"
   }
 }

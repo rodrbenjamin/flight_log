@@ -1,14 +1,16 @@
 package eu.profinit.education.flightlog.service;
 
-import eu.profinit.education.flightlog.domain.repositories.FlightRepository;
-import eu.profinit.education.flightlog.to.FileExportTo;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import eu.profinit.education.flightlog.domain.repositories.FlightRepository;
+import eu.profinit.education.flightlog.to.FileExportTo;
+
 @Service
 public class CsvExportServiceImpl implements CsvExportService {
 
+    // TODO 4.4 Vhodné vlastnosti CSV souboru definujte jako konstanty
     private final FlightRepository flightRepository;
 
     private final String fileName;
@@ -24,5 +26,4 @@ public class CsvExportServiceImpl implements CsvExportService {
         // Tip: můžete použít Apache Commons CSV - https://commons.apache.org/proper/commons-csv/ v příslušných pom.xml naleznete další komentáře s postupem
         throw new NotImplementedException("Not implemented");
     }
-
 }

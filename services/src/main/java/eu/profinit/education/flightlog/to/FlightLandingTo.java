@@ -1,15 +1,17 @@
 package eu.profinit.education.flightlog.to;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
 import java.time.LocalDateTime;
 
-@Data
+@Value
 @Builder
+@Jacksonized
 public class FlightLandingTo {
 
-    private Long flightId;
-    private LocalDateTime landingTime;
+    Long flightId;
 
+    LocalDateTime landingTime;
 }

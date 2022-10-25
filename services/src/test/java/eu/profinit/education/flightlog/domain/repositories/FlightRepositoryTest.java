@@ -1,26 +1,18 @@
 package eu.profinit.education.flightlog.domain.repositories;
 
-import eu.profinit.education.flightlog.IntegrationTestConfig;
-import eu.profinit.education.flightlog.domain.entities.Flight;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = IntegrationTestConfig.class)
-@Transactional
-@TestPropertySource(
-    locations = "classpath:application-integrationtest.properties")
-public class FlightRepositoryTest {
+import eu.profinit.education.flightlog.AbstractIntegrationTest;
+import eu.profinit.education.flightlog.domain.entities.Flight;
+
+
+public class FlightRepositoryTest extends AbstractIntegrationTest {
 
     @Autowired
     private FlightRepository testSubject;
@@ -30,30 +22,29 @@ public class FlightRepositoryTest {
 
         List<Flight> flights = testSubject.findAll();
 
-        assertEquals("There should be 5 flights", 5, flights.size());
+        assertEquals(5, flights.size(), "There should be 5 flights");
 
     }
 
-    @Ignore("Testovana metoda neni implementovana")
+    @Disabled("Testovana metoda neni implementovana")
     @Test
     public void shouldLoadGliderFlights() {
-        // TODO 2.2: Zmente volanou testovaci metodu, aby vratila vsechny lety kluzaku a smažte anotaci @Ignore
+        // TODO 2.2: Zmente volanou testovaci metodu, aby vratila vsechny lety kluzaku a smažte anotaci @Disabled
         List<Flight> flights = testSubject.findAll();
 
-        assertEquals("There should be 2 glider flights", 2, flights.size());
+        assertEquals(2, flights.size(), "There should be 2 glider flights");
     }
 
-    @Ignore("Testovana metoda neni implementovana")
+    @Disabled("Testovana metoda neni implementovana")
     @Test
     public void shouldLoadFlightsInTheAir() {
-        // TODO 2.4: Doplňte název testované metody a smažte anotaci @Ignore
+        // TODO 2.4: Doplňte název testované metody a smažte anotaci @Disabled
         List<Flight> flights = null;// testSubject.*
-
-        assertEquals("There should be 3 flights", 3, flights.size());
-        assertEquals("Flight with ID 5 started first and should be first", 5L, flights.get(0).getId().getId().longValue());
-        assertEquals("Flight with ID 1 should be second", 1L, flights.get(1).getId().getId().longValue());
-        assertEquals("Flight with ID 2 should be third", 2L, flights.get(2).getId().getId().longValue());
+        
+        assertEquals(3, flights.size(), "There should be 3 flights");
+        assertEquals(5L, flights.get(0).getId().getId().longValue(),
+                "Flight with ID 5 started first and should be first");
+        assertEquals(1L, flights.get(1).getId().getId().longValue(), "Flight with ID 1 should be second");
+        assertEquals(2L, flights.get(2).getId().getId().longValue(), "Flight with ID 2 should be third");
     }
-
-
 }

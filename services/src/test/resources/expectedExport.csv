@@ -1,0 +1,7 @@
+"sep=,"
+FlightID,TakeoffTime,LandingTime,Immatriculation,Type,Pilot,Copilot,Task,TowplaneID,GliderID
+5,22.10.2018 12:30:00,,OK-123,KKB-15,Kamila Spoustová,,,,
+1,23.10.2018 13:30:00,,OK-V23424,Zlín Z-42M,Kamila Spoustová,,VLEK,,2
+2,23.10.2018 13:30:00,,OK-B123,L-13A Blaník,Kamila Spoustová,,,1,
+3,24.10.2018 17:30:00,23.10.2018 19:30:00,OK-V23424,Zlín Z-42M,Řehoř Novák,Kamila Spoustová,VLEK,,4
+4,24.10.2018 17:30:00,23.10.2018 17:30:00,OK-B123,L-13A Blaník,Naděžda Pavelková,Řehoř Novák,1A,3,

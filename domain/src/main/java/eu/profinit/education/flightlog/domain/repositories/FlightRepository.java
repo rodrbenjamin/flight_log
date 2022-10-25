@@ -1,9 +1,12 @@
 package eu.profinit.education.flightlog.domain.repositories;
 
-import eu.profinit.education.flightlog.domain.entities.Flight;
+import java.util.List;
+
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import eu.profinit.education.flightlog.domain.entities.Flight;
 
 public interface FlightRepository extends JpaRepository<Flight, Long> {
 
@@ -11,12 +14,10 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
     List<Flight> findAll();
 
     // TODO 2.3: Vytvořte metodu podle jejíhož názvu SpringData správně načte lety, které jsou právě ve vzduchu
-    // Lety by se měly řadit od nejstarších a v případě shody podle ID tak, aby vlečná byla před kluzákem, který táhne
-    // Výsledek si můžete ověřit v testu k této tříde v modulu services
-
+    // Tip: Lety by se měly řadit od nejstarších a v případě shody podle ID tak, aby vlečná byla před kluzákem, který táhne
+    // Tip: Výsledek si můžete ověřit v testu k této tříde v modulu services
 
 
     // TODO 8.1: Vytvorte metodu pro nacteni vlecnych letu pro vytvoreni dvojice letu na obrazovce Report
-
 }
 

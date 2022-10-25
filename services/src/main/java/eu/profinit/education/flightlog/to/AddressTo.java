@@ -1,21 +1,24 @@
 package eu.profinit.education.flightlog.to;
 
 import eu.profinit.education.flightlog.domain.entities.Address;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+import java.io.Serializable;
+
+@Value
 @Builder
-public class AddressTo {
+@Jacksonized
+public class AddressTo implements Serializable {
 
-    private String street;
-    private String city;
-    private String postalCode;
-    private String country;
+    String street;
+
+    String city;
+
+    String postalCode;
+
+    String country;
 
     public static AddressTo fromEntity(Address entity) {
         if (entity == null) {
