@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: jklimes
+      changes:
+        - sqlFile:
+            path: 1-schema/01_init_schema.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 2
+      author: jklimes
+      changes:
+        - sqlFile:
+            path: 2-data/02_insert_initial_airplanes.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: T01 # Test data are independent of schema and data, so they have unique change set IDs with prefix T
+      author: jklimes
+      context: test-data
+      changes:
+        - sqlFile:
+            path: test-data/01_insert_test_data.sql
+            relativeToChangelogFile: true

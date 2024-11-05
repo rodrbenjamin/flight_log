@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="FlightLogApplication (local)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="local,stub" />
+    <module name="flightlog" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="eu.profinit.education.flightlog.FlightLogApplication" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="eu.profinit.education.flightlog.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

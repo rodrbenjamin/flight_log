@@ -1,4 +1,5 @@
 export default {
   debug: true,
-  testing: false
+  testing: false,
+  backendUrl: "http://localhost:8081/"
 };

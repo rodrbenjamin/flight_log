@@ -14,11 +14,13 @@ export function configure(aurelia) {
 
   let container = aurelia.container;
 
+  console.log("Environment: ", environment)
+
   let http = new HttpClient();
   http.configure(config => {
     config
     .useStandardConfiguration()
-    .withBaseUrl('http://localhost:8081/')
+    .withBaseUrl(environment.backendUrl)
     .withDefaults({
       headers: {
         'Accept': 'application/json'
