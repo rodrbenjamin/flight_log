@@ -32,8 +32,6 @@ class FlightLogWorkflowTest extends IntegrationTestBase{
     @Autowired
     private TestRestTemplate restTemplate;
 
-    // TODO: 2.6 Smažte disabled a spusťte test po implementaci FlightService.getFlightsInTheAir
-    @Disabled("Method /flight/inAir is not implemented at service layer")
     @Test
     void flightsInAirAndLanding() throws Exception {
         ResponseEntity<List<Map<?, ?>>> flightsResponse = restTemplate.exchange("/flight/inAir", HttpMethod.GET, null,

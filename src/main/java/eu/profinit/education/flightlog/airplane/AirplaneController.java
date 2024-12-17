@@ -2,6 +2,8 @@ package eu.profinit.education.flightlog.airplane;
 
 import java.util.List;
 
+import eu.profinit.education.flightlog.flight.FlightTuppleTo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,10 +11,14 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class AirplaneController {
 
-    // TODO 3.1: Vystavte REST endpoint vracející seznam klubových letadel
-    // Tip: letadla získáte voláním AirplaneService
-    // Tip: bude se volat metoda GET na /airplane
-    // Tip: struktura odpovědi je dána objektem AirplaneTo
+    private final AirplaneService airplaneService;
+
+    @GetMapping("airplane")
+    public List<AirplaneTo> getClubAirplanes(){
+        log.debug("Called REST ENDPOINT getClubAirplanes");
+        return airplaneService.getClubAirplanes();
+    }
 }

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.AdditionalAnswers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import eu.profinit.education.flightlog.person.user.ClubDatabaseDao;
@@ -89,10 +90,36 @@ class PersonServiceTest {
         assertSame(clubMemberFromDd, person, "Should return prepared instance");
     }
 
-    @Disabled("Test is not implemented")
     @Test
     void shouldCreateNewClubMember() {
-        // TODO 7.1: Naimplementujte unit test s pouzitim mocku
+        Long newClubMemberId = 2L;
+        String firstName = "Jan";
+        String lastName = "Bajer";
+
+        PersonTo clubMember = PersonTo.builder()
+            .firstName(firstName)
+            .lastName(lastName)
+            .memberId(newClubMemberId)
+            .address(AddressTo.builder()
+                .street("Tychonova 2")
+                .city("Praha 6")
+                .postalCode("16000")
+                .build())
+            .build();
+
+        User user = new User(newClubMemberId, firstName, lastName, List.of("ROLE_PILOT"));
+
+        // mock behaviour
+        when(personRepository.findByMemberId(newClubMemberId)).thenReturn(Optional.empty());
+        when(personRepository.save(any())).thenAnswer(AdditionalAnswers.returnsFirstArg());
+        when(clubDatabaseDao.getUsers()).thenReturn(List.of(user));
+
+        // call tested method
+        Person result = testSubject.getExistingOrCreatePerson(clubMember);
+        // verify results
+        assertEquals(Person.Type.CLUB_MEMBER, result.getPersonType(), "Person type does not match");
+        assertEquals(clubMember.getFirstName(), result.getFirstName(), "First name does not match");
+        assertEquals(clubMember.getLastName(), result.getLastName(), "Last name does not match");
     }
 
 }

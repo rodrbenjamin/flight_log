@@ -3,6 +3,7 @@ package eu.profinit.education.flightlog.flight;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import eu.profinit.education.flightlog.person.PersonService;
 import org.springframework.data.domain.PageRequest;
@@ -104,14 +105,23 @@ public class FlightServiceImpl implements FlightService {
     @Transactional(readOnly = true)
     @Override
     public List<FlightTo> getFlightsInTheAir() {
-        // TODO 2.5: načtěte lety ve vzduchu pomocí vaší nové metody ve FlightRepository
-        // Tip: Můžete použít Java 8 Stream API pro konverzi na Transfer Object (TO)
-        return new ArrayList<>();
+        List<Flight> flightsInTheAir = flightRepository.findAllByLandingTimeNullOrderByTakeoffTimeAscIdAsc();
+
+        List<FlightTo> fligtsTo = flightsInTheAir.stream().map(FlightTo::fromEntity).toList();
+
+        return fligtsTo;
     }
 
     @Override
     public List<FlightTuppleTo> getFlightsForReport() {
-        // TODO 8.2: Nactete dvojice letu pro obrazovku report
-        return new ArrayList<>();
+        List<FlightTuppleTo> result = new ArrayList<>();
+        List<Flight> allTowPlanes = flightRepository.findAllByFlightTypeOrderByTakeoffTimeAscIdAsc(Flight.Type.TOWPLANE);
+        allTowPlanes.forEach((tF) ->
+            result.add(FlightTuppleTo.builder()
+                .towplane(FlightTo.fromEntity(tF.getTowplaneFlight()))
+                .towplane(FlightTo.fromEntity(tF.getGliderFlight()))
+                .build()));
+
+        return result;
     }
 }

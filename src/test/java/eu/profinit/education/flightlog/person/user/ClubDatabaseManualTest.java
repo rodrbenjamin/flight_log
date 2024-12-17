@@ -11,8 +11,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-// TODO 5.3: odstraňte @Disabled a spusťte test proti testovacímu prostředí ClubDB.
-@Disabled("Test is ignored because it requires clubDB server to run.")
 @SpringBootTest
 @TestPropertySource(properties = {"integration.clubDb.baseUrl = http://vyuka.profinit.eu:8080"})
 class ClubDatabaseManualTest {

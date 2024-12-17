@@ -17,22 +17,20 @@ public class ClubDatabaseDaoImpl implements ClubDatabaseDao {
     private final RestTemplate restTemplate;
     private final String clubDbBaseUrl;
 
-    // TODO 5.2: načtěte property integration.clubDb.baseUrl z application.properties (hint: CsvExportServiceImpl)
-    public ClubDatabaseDaoImpl() {
+    public ClubDatabaseDaoImpl(@Value("${integration.clubDb.baseUrl}") String clubDbBaseUrl) {
         this.restTemplate = new RestTemplate();
-       this.clubDbBaseUrl = null;
+       this.clubDbBaseUrl = clubDbBaseUrl;
     }
 
     @Override
-    public List<User> getUsers() {
-        User[] userList;
+    public List<User> getUsers() {User[] userList;
         try {
-            // TODO 5.3: implementujte tělo volání endpointu ClubDB pomocí REST template
-            userList = new User[]{};
+            userList = restTemplate.
+                getForObject(clubDbBaseUrl + "/club/user", User[].class);
 
+            return List.of(userList);
         } catch (RuntimeException e) {
-            throw new ExternalSystemException("Cannot get users from Club database. URL: {}. Call resulted in exception.", e, clubDbBaseUrl);
+            throw new ExternalSystemException("Externí API neodpovídá");
         }
-        return Arrays.asList(userList);
     }
 }

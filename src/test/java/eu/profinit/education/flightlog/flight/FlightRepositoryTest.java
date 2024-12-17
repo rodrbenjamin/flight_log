@@ -35,16 +35,13 @@ class FlightRepositoryTest extends IntegrationTestBase {
 
     }
 
-    @Disabled("Testovana metoda neni implementovana")
     @Test
     void shouldLoadGliderFlights() {
-        // TODO 2.2: Zmente volanou testovaci metodu, aby vratila vsechny lety kluzaku a smažte anotaci @Disabled
-        List<Flight> flights = testSubject.findAll();
+        List<Flight> flights = testSubject.findAllByFlightType(Flight.Type.GLIDER);
 
         assertEquals(2, flights.size(), "There should be 2 glider flights");
     }
 
-    @Disabled("Testovana metoda neni implementovana")
     @Test
     void shouldLoadFlightsInTheAir() {
         final Flight flight = Flight.builder()
@@ -57,8 +54,7 @@ class FlightRepositoryTest extends IntegrationTestBase {
 
         testSubject.saveAndFlush(flight);
 
-        // TODO 2.4: Doplňte název testované metody a smažte anotaci @Disabled
-        List<Flight> flights = null;// testSubject.*
+        List<Flight> flights = testSubject.findAllByLandingTimeNullOrderByTakeoffTimeAscIdAsc();
 
         assertEquals(2, flights.size(), "There should be 2 flights");
         assertEquals(5L, flights.get(0).getId().getId().longValue(),
